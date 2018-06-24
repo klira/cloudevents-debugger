@@ -1,0 +1,16 @@
+{
+  "presets": [
+    ["env", {
+      "loose": true,
+      "useBuiltIns": true,
+      "targets": {
+        "chrome": "60",
+        "safari": "11.1"
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-runtime",
+    ["babel-plugin-transform-react-jsx", { "pragma":"h", useBuiltIns: true }]
+  ]
+}

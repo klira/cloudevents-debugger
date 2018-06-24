@@ -1,0 +1,10 @@
+.viewer {
+    display: flex;
+    align-items: stretch;
+    flex: 1 1 auto;
+}
+
+.viewer > div:first-child {
+    flex: 0 0 40vh;
+    margin-right: 1em;
+}
