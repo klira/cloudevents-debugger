@@ -1,5 +1,5 @@
 import { h, Component } from "preact";
-import { getEvents } from "./api";
+import { getEvents, connectToFeed } from "./api";
 import Sidebar from "./Sidebar";
 import ActiveEventView from "./ActiveEventView.js";
 import classNames from "./Viewer.css";
@@ -17,12 +17,20 @@ class Viewer extends Component {
       error: null
     };
     this.onSelectedEvent = this.onSelectedEvent.bind(this);
+    this.onEventAdded = this.onEventAdded.bind(this);
+  }
+
+  onEventAdded(e) {
+    const data = JSON.parse(e);
+    const newEvents = [data].concat(this.state.events);
+    this.setState({ events: newEvents });
   }
 
   async componentDidMount() {
     try {
       const events = await getEvents(this.props.namespace);
       this.setState({ loading: false, events });
+      connectToFeed(this.props.namespace, this.onEventAdded);
     } catch (e) {
       this.setState({ error: null });
     }
