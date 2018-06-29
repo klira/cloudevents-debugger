@@ -8,8 +8,7 @@ const update = () => {
   if (!rootEl) {
     rootEl = document.getElementById("root");
   }
-  //currentEl = render(<App />, rootEl, currentEl);
-  render(<App />, rootEl, true);
+  currentEl = render(<App />, rootEl, currentEl);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
