@@ -1,4 +1,5 @@
-import { h, Component } from "preact";
+import { h, Component } from "preact"
+import { route } from 'preact-router';
 
 const getURL = bin => {
   if (bin.length) {
@@ -60,8 +61,8 @@ class BinChooserImpl extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { bin } = this.state.bin;
-    this.props.onBinChosen(bin);
+    const { bin } = this.state;
+    route(`/v/${bin}`);
   }
 }
 
