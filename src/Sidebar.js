@@ -23,7 +23,6 @@ const Sidebar = ({ events, onClick }) => (
     <div>CloudEvents.live</div>
     {events.map(x => (
       <SidebarEvent
-        key={x.eventID}
         onClick={onClick}
         eventType={x.eventType}
         eventTime={x.eventTime}
