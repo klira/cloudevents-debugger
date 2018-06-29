@@ -9,7 +9,7 @@ const update = () => {
     rootEl = document.getElementById("root");
   }
   //currentEl = render(<App />, rootEl, currentEl);
-  render(<App />, rootEl);
+  render(<App />, rootEl, true);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
