@@ -20,8 +20,7 @@ class Viewer extends Component {
     this.onEventAdded = this.onEventAdded.bind(this);
   }
 
-  onEventAdded(e) {
-    const data = JSON.parse(e);
+  onEventAdded(data) {
     const newEvents = [data].concat(this.state.events);
     this.setState({ events: newEvents });
   }
