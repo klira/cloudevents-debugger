@@ -1,7 +1,20 @@
-import WebSockHop from "websockhop";
+import io from 'socket.io-client';
 
-// FIXME: This should be configurable
-const BASE_URL = "https://bin.cloudevents.live";
+//const BASE_URL = "https://bin.cloudevents.live";
+const BASE_URL = "http://localhost:8182";
+
+const socket = io(BASE_URL, {
+  transports: ['websocket']
+});
+
+const eventTable = []
+
+socket.on("event", ({ns, event}) => {
+  eventTable
+    .filter(x => x.ns === ns)
+    .map(x => x.fn)
+    .forEach(fn => fn(event))
+})
 
 const eventsURL = namespace => `${BASE_URL}/api/${namespace}/events`;
 
@@ -17,8 +30,6 @@ const offersAcceptURL = (id, token, offerId) =>
   `${BASE_URL}/${id}/${token}/accept/${offerId}`;
 
 export const connectToFeed = (ns, fn) => {
-  const wsh = new WebSockHop(feedURL(ns));
-  wsh.on("message", fn);
-  wsh.connect()
-  return wsh;
+  socket.emit("join", { room: ns })
+  eventTable.push({ ns, fn })
 };
