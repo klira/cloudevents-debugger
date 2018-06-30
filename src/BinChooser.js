@@ -1,5 +1,6 @@
-import { h, Component } from "preact"
-import { route } from 'preact-router';
+import { h, Component } from "preact";
+import { route } from "preact-router";
+import classNames from "./BinChoser.css";
 
 const getURL = bin => {
   if (bin.length) {
@@ -10,27 +11,25 @@ const getURL = bin => {
 };
 
 const BinChooser = ({ bin, url, onSubmit, onChange }) => (
-  <div>
-    <p>
+  <form onSubmit={onSubmit} className={classNames.form}>
+    <h2>Name your bin</h2>
+    <p className={classNames.info}>
       To begin choose the name of the bin where you will be sending your events.
+      You then send webhooks to that bin.
     </p>
-    <form onSubmit={onSubmit}>
-      <div>
-        Bin name:{" "}
-        <input
-          type="text"
-          placeholder="Bin"
-          name="bin"
-          pattern="[A-Za-z0-9\-]+"
-          onInput={onChange}
-        />
-      </div>
-      <div>
-        Send Webhooks to: <input type="text" readonly={true} value={url} />
-      </div>
-      <input type="submit" value="Go!" />
-    </form>
-  </div>
+    <div>Bin name: </div>
+    <input
+      autofocus
+      type="text"
+      placeholder="Bin"
+      name="bin"
+      pattern="[A-Za-z0-9\-]+"
+      onInput={onChange}
+    />
+    <div>Send Webhooks to:</div>
+    <input type="text" readonly={true} value={url} />
+    <input type="submit" value="Go!" />
+  </form>
 );
 
 class BinChooserImpl extends Component {
