@@ -1,7 +1,6 @@
 import io from 'socket.io-client';
 
-//const BASE_URL = "https://bin.cloudevents.live";
-const BASE_URL = "http://localhost:8182";
+const BASE_URL = "https://bin.cloudevents.live" || process.env.BIN_BASE_URL;
 
 const socket = io(BASE_URL, {
   transports: ['websocket']
